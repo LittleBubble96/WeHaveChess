@@ -1,0 +1,5 @@
+﻿Id,名字,血量,攻击,暴击伤害,暴击率,花费,最大等级
+Id,Name,Hp,Damage,CriticalDamage,CriticalRate,Coin,MaxLevel
+1,wz,12,1,2,0.2,1,3
+2,qyl,22,2,3,0.2,2,3
+3,ee,34,3,4,0.2,2,3

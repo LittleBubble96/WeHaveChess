@@ -2,16 +2,13 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Mm]emoryCaptures/
-
-# Asset meta data should only be ignored when the corresponding asset is also ignored
-!/[Aa]ssets/**/*.meta
+/2021.1.25/Chess/MyChess/[Ll]ibrary/
+/2021.1.25/Chess/MyChess/[Tt]emp/
+/2021.1.25/Chess/MyChess/[Oo]bj/
+/2021.1.25/Chess/MyChess/[Bb]uild/
+/2021.1.25/Chess/MyChess/[Bb]uilds/
+/2021.1.25/Chess/MyChess/[Ll]ogs/
+/2021.1.25/Chess/MyChess/[Mm]emoryCaptures/
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
