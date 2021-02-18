@@ -28,10 +28,15 @@ public class UI_C_Game : UI_Base<UI_C_GameContent>
     {
         base.Init();
         UiType = UIType.Normal;
-        // _flashRoot = transform.GetChildrenComponentByNode<Transform>("flashRoot");
-        // _cardItems = _flashRoot.GetComponentsInChildren<UI_CardItem>();
+        _flashRoot = transform.GetChildrenComponentByNode<Transform>("flashRoot");
+        _cardItems = _flashRoot.GetComponentsInChildren<UI_CardItem>();
         
         _fillSize = stageFill.sizeDelta;
+
+        foreach (var card in _cardItems)
+        {
+            card.Init();
+        }
         
         BubbleFrameEntry.GetModel<AppEventDispatcher>().AddEventListener<EventType>(EventName.EVENT_REFRESH_STAGENAME,OnRefreshStageName);
         BubbleFrameEntry.GetModel<AppEventDispatcher>().AddEventListener<EventType>(EventName.EVENT_REFRESH_STAGETIME,OnRefreshStageTime);
@@ -74,7 +79,10 @@ public class UI_C_Game : UI_Base<UI_C_GameContent>
     {
         if (obj is MultiEvent<List<C_CardData>> item)
         {
-            
+            for (int i = 0; i < _cardItems.Length; i++)
+            {
+                _cardItems[i].SetContent(item.Value[i]);
+            }
         }
     }
 

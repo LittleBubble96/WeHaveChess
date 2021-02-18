@@ -9,4 +9,7 @@ public class C_Rig
     
     //卡片系统
     public static readonly C_CardSystem CardSystem = new C_CardSystem();
+    
+    //阵营
+    public static readonly C_CampManager CampManager = new C_CampManager();
 }

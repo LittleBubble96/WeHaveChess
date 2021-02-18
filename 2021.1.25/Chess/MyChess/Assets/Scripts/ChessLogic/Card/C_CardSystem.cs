@@ -45,7 +45,7 @@ public partial class C_CardSystem
         targetCard.SynthesisUIds.Add(consume1UId);
         targetCard.SynthesisUIds.Add(consume2UId);
 
-        targetCard.CardGameData.CardLevel++;
+        targetCard.RoleProperty.CardLevel++;
         targetCard.RefreshGameCard();
         return true;
     }

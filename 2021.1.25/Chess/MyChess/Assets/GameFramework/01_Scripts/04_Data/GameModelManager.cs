@@ -101,4 +101,40 @@ public class GameModelManager : BubbleFrameModel
     }
 
     #endregion
+
+    #region 阵营
+
+    private List<CampData> getCampDatas;
+
+    public List<CampData> GetCampDatas
+    {
+        get
+        {
+            if (getCampDatas == null)
+            {
+                getCampDatas = DataModelTable<CampData>.ParseTable().ToList();
+            }
+            return getCampDatas;
+        }
+    }
+
+    #endregion
+
+    #region 阵营类型
+
+    private List<CampTypeData> getCampTypeDatas;
+
+    public List<CampTypeData> GetCampTypeDatas
+    {
+        get
+        {
+            if (getCampTypeDatas == null)
+            {
+                getCampTypeDatas = DataModelTable<CampTypeData>.ParseTable().ToList();
+            }
+            return getCampTypeDatas;
+        }
+    }
+
+    #endregion
 }

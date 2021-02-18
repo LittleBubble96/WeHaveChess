@@ -10,7 +10,7 @@ public class C_CardData
     //卡片基础属性
     public CardData CardData;
 
-    public SCardGameData CardGameData;
+    public SRoleProperty RoleProperty;
     
     public List<int> SynthesisUIds = new List<int>();
 
@@ -19,7 +19,7 @@ public class C_CardData
         UId = uId;
         CardData = BubbleFrameEntry.GetModel<GameModelManager>().GetCardDatas.Find((c) => c.Id == cardId);
         
-        CardGameData = new SCardGameData()
+        RoleProperty = new SRoleProperty()
         {
             CardLevel = 1,
             Hp = CardData.Hp,
@@ -34,23 +34,23 @@ public class C_CardData
 
     public bool IsMaxLevel()
     {
-        return CardGameData.CardLevel >= CardData.MaxLevel;
+        return RoleProperty.CardLevel >= CardData.MaxLevel;
     }
 
     public void RefreshGameCard()
     {
-        CardGameData.Hp = CardData.Hp;
-        CardGameData.Damage = CardData.Damage;
-        CardGameData.CriticalDamage = CardData.CriticalDamage;
-        CardGameData.CriticalRate = CardData.CriticalRate;
-        CardGameData.Coin = CardData.Coin;
+        RoleProperty.Hp = CardData.Hp;
+        RoleProperty.Damage = CardData.Damage;
+        RoleProperty.CriticalDamage = CardData.CriticalDamage;
+        RoleProperty.CriticalRate = CardData.CriticalRate;
+        RoleProperty.Coin = CardData.Coin;
     }
 
     #endregion
   
 }
 
-public struct SCardGameData
+public struct SRoleProperty
 {
     //当前等级
     public int CardLevel;

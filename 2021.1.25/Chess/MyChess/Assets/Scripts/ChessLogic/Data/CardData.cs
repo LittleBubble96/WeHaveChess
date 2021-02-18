@@ -7,6 +7,9 @@ public class CardData :DataModelBase
     //ID
     public int Id;
     
+    //Name
+    public string Name;
+
     //血量
     public float Hp;
 
@@ -24,4 +27,13 @@ public class CardData :DataModelBase
     
     //最大等级
     public int MaxLevel;
+    
+    //阵营1
+    public int CampType1;
+    //阵营2
+    public int CampType2;
+    //阵营3
+    public int CampType3;
+    //阵营4
+    public int CampType4;
 }

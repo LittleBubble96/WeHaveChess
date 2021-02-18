@@ -198,6 +198,8 @@ public class C_LevelManager
                 break;
         }
         battleMoBase.Init(CurSection);
+        
+        CheckFlashCard();
     }
 
     //抽卡    pve 和 pvp

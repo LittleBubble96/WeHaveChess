@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using BubbleFramework.Bubble_Event;
 using UnityEngine;
+using EventType = BubbleFramework.Bubble_Event.EventType;
 
 /// <summary>
 /// 人物基类  
@@ -21,6 +24,7 @@ public class C_Player : MonoBehaviour
     public virtual void Init()
     {
         roleInfo = new SRoleInfo(100, 10);
+        BubbleFrameEntry.GetModel<AppEventDispatcher>().AddEventListener<EventType>(EventName.EVENT_REFRESH_FLASHCARD,OnFlashCard);
     }
 
     public virtual void DoUpdate(float dt)
@@ -64,6 +68,11 @@ public class C_Player : MonoBehaviour
         }
     }
 
+    protected virtual void OnFlashCard(EventType obj)
+    {
+        
+    }
+
     //受伤
     protected virtual void Injure()
     {
@@ -75,9 +84,12 @@ public class C_Player : MonoBehaviour
     {
         
     }
-    
-    
 
+    //销毁
+    protected virtual void OnClear()
+    {
+        BubbleFrameEntry.GetModel<AppEventDispatcher>().RemoveEventListener<EventType>(EventName.EVENT_REFRESH_FLASHCARD,OnFlashCard);
+    }
 }
 
 
