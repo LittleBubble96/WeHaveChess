@@ -26,7 +26,8 @@ public class C_CardData
             Damage =  CardData.Damage,
             CriticalDamage = CardData.CriticalDamage,
             CriticalRate = CardData.CriticalRate,
-            Coin = CardData.Coin
+            Coin = CardData.Coin,
+            AvatarPath = CardData.Path
         };
     }
 
@@ -69,5 +70,8 @@ public struct SRoleProperty
     
     //金币
     public int Coin;
+
+    //头像路径
+    public string AvatarPath;
 
 }

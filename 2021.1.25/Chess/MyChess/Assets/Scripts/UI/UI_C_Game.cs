@@ -23,12 +23,15 @@ public class UI_C_Game : UI_Base<UI_C_GameContent>
     //抽卡得卡片
     private UI_CardItem[] _cardItems;
     
+    private Transform _cardRoot;
+
     private Vector2 _fillSize;
     public override void Init()
     {
         base.Init();
         UiType = UIType.Normal;
         _flashRoot = transform.GetChildrenComponentByNode<Transform>("flashRoot");
+        _cardRoot = transform.GetChildrenComponentByNode<Transform>("CardRoot");
         _cardItems = _flashRoot.GetComponentsInChildren<UI_CardItem>();
         
         _fillSize = stageFill.sizeDelta;
@@ -77,8 +80,9 @@ public class UI_C_Game : UI_Base<UI_C_GameContent>
     //抽卡
     private void OnFlashCard(EventType obj)
     {
-        if (obj is MultiEvent<List<C_CardData>> item)
+        if (obj is MultiEvent<List<C_CardData>,bool> item)
         {
+            _cardRoot.gameObject.SetActive(item.Value1);
             for (int i = 0; i < _cardItems.Length; i++)
             {
                 _cardItems[i].SetContent(item.Value[i]);

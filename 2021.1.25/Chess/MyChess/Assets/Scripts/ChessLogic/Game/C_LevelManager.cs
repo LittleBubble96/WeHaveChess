@@ -37,10 +37,7 @@ public class C_LevelManager
         
         CurStageCount = 1;
         CurSectionCount = 1;
-
-        CheckStage();
-
-        StageState = EStageState.ReadyStage;
+        
     }
 
     public void DoUpdate(float dt)
@@ -207,10 +204,8 @@ public class C_LevelManager
     {
         bool canFlash = (EStageType) CurSection.FlowType == EStageType.Pve ||
                         (EStageType) CurSection.FlowType == EStageType.Pvp;
-        if (canFlash)
-        {
-            BubbleFrameEntry.GetModel<AppEventDispatcher>().BroadcastListener(EventName.EVENT_REFRESH_FLASHCARD,C_Rig.CardSystem.GetRandomCards(5));
-        }
+        
+        BubbleFrameEntry.GetModel<AppEventDispatcher>().BroadcastListener(EventName.EVENT_REFRESH_FLASHCARD,C_Rig.CardSystem.GetRandomCards(5),canFlash);
     }
 
 }

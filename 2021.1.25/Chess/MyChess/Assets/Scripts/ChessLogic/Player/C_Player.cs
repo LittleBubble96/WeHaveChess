@@ -10,21 +10,23 @@ using EventType = BubbleFramework.Bubble_Event.EventType;
 /// </summary>
 public class C_Player : MonoBehaviour
 {
-    //出战牌
-    [HideInInspector]
-    public List<C_CardData> playingCards = new List<C_CardData>();
-    
-    //手牌
-    [HideInInspector]
-    public List<C_CardData> handCards = new List<C_CardData>();
-
     //人物属性
     [HideInInspector] public SRoleInfo roleInfo;
 
+    //人物出战牌阵营
+    [HideInInspector] public C_RoleCamp roleCamp;
+    
+    //人物手牌管理
+    [HideInInspector] public C_RoleHand roleHand;
+
     public virtual void Init()
     {
-        roleInfo = new SRoleInfo(100, 10);
-        BubbleFrameEntry.GetModel<AppEventDispatcher>().AddEventListener<EventType>(EventName.EVENT_REFRESH_FLASHCARD,OnFlashCard);
+        roleInfo = new SRoleInfo(100, C_CoreData.GlobalVariable.InitCoin);
+        roleCamp = new C_RoleCamp();
+        roleHand = new C_RoleHand();
+        roleCamp.Init();
+        roleHand.Init();
+        // BubbleFrameEntry.GetModel<AppEventDispatcher>().AddEventListener<EventType>(EventName.EVENT_REFRESH_FLASHCARD,OnFlashCard);
     }
 
     public virtual void DoUpdate(float dt)
@@ -48,25 +50,20 @@ public class C_Player : MonoBehaviour
         }
     }
     
-    //抽卡
-    public virtual void FlashCard(C_CardData cardData)
-    {
-        if (handCards.Contains(cardData))
-        {
-            return;
-        }
-        handCards.Add(cardData);
-    }
+    // //抽卡
+    // public virtual void FlashCard(C_CardData cardData,int position)
+    // {
+    //     if (IsHandCard(cardData))
+    //     {
+    //         return;
+    //     }
+    //     handCards.Add(new SHandCardInfo()
+    //     {
+    //         Position = position,
+    //         HandCard = cardData
+    //     });
+    // }
     
-    //出战卡片
-    public virtual void GoWarCard(C_CardData cardData)
-    {
-        if (handCards.Contains(cardData))
-        {
-            handCards.Remove(cardData);
-            playingCards.Add(cardData);
-        }
-    }
 
     protected virtual void OnFlashCard(EventType obj)
     {
@@ -85,11 +82,34 @@ public class C_Player : MonoBehaviour
         
     }
 
-    //销毁
-    protected virtual void OnClear()
+    //消耗金币
+    protected virtual bool AddCoin(int coin)
     {
-        BubbleFrameEntry.GetModel<AppEventDispatcher>().RemoveEventListener<EventType>(EventName.EVENT_REFRESH_FLASHCARD,OnFlashCard);
+        if (roleInfo.Coin + coin < 0)
+        {
+            //金币不足
+            return false;
+        }
+        roleInfo.Coin += coin;
+        return true;
     }
+
+    //销毁
+    public virtual void OnClear()
+    {
+        // BubbleFrameEntry.GetModel<AppEventDispatcher>().RemoveEventListener<EventType>(EventName.EVENT_REFRESH_FLASHCARD,OnFlashCard);
+    }
+    
+    //出战卡片
+    public virtual void GoWarCard(C_CardData cardData , int[] coordinate)
+    {
+        if (roleHand.IsHandCard(cardData))
+        {
+            roleHand.RemoveHandCard(cardData);
+            roleCamp.GoWarCard(cardData, coordinate);
+        }
+    }
+    
 }
 
 
@@ -110,4 +130,11 @@ public struct SRoleInfo
         Hp = hp;
         Coin = initCoin;
     }
+}
+
+public struct SHandCardInfo
+{
+    public int Position;
+
+    public C_CardData HandCard;
 }

@@ -36,4 +36,7 @@ public class CardData :DataModelBase
     public int CampType3;
     //阵营4
     public int CampType4;
+    
+    //预制路径
+    public string Path;
 }

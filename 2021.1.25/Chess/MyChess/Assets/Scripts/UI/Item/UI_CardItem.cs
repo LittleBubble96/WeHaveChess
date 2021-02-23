@@ -11,10 +11,18 @@ public class UI_CardItem : MonoBehaviour
     private UI_CampItem[] campItems;
 
     private Text _cardName;
+
+    private Button _selectionCardBtn;
+
+    private Transform _root;
+    
     public void Init()
     {
         campItems = GetComponentsInChildren<UI_CampItem>();
         _cardName = transform.GetChildrenComponentByNode<Text>("CardName");
+        _selectionCardBtn = transform.GetChildrenComponentByNode<Button>("selectBtn");
+        _root = transform.GetChildrenComponentByNode<Transform>("root");
+        
         foreach (var campItem in campItems)
         {
             campItem.Init();
@@ -23,6 +31,7 @@ public class UI_CardItem : MonoBehaviour
 
     public void SetContent(C_CardData cardData)
     {
+        ShowView(true);
         _cardData = cardData;
         _cardName.text = _cardData.CardData.Name +"";
         //第一个阵营
@@ -57,5 +66,22 @@ public class UI_CardItem : MonoBehaviour
             campItems[3].SetContent(type4);
         }
         campItems[3].gameObject.SetActive(type4!=null);
+        
+        //设置按钮
+        _selectionCardBtn.onClick.RemoveAllListeners();
+        _selectionCardBtn.onClick.AddListener(OnSelection);
+    }
+
+    private void OnSelection()
+    {
+        if ( C_GameManager.Instance.roleManager.OwnPlayer.OnGetCardInHandCards(_cardData))
+        {
+            ShowView(false);
+        }
+    }
+
+    private void ShowView(bool isShow)
+    {
+        _root.gameObject.SetActive(isShow);
     }
 }

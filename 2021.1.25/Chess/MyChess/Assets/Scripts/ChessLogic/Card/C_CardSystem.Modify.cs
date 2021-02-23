@@ -34,7 +34,7 @@ public partial class C_CardSystem
         for (int i = 0; i < cardCount; i++)
         {
             int random = Utility.Random.GetRandom(0, CardDeck.Count - 1);
-            result.Add(GetCardById(random));
+            result.Add(CardDeck[random]);
         }
         return result;
     }

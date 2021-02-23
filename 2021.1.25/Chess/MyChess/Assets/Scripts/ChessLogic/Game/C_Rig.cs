@@ -12,4 +12,7 @@ public class C_Rig
     
     //阵营
     public static readonly C_CampManager CampManager = new C_CampManager();
+    
+    //本地缓存和 全局数据
+    public static C_CoreData CoreData = new C_CoreData();
 }

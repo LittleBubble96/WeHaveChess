@@ -10,15 +10,15 @@ public class C_CampManager
     private List<CampData> _tempCampAdditions = new List<CampData>();
     
     //获取战场里相同阵营的集合
-    public List<SCampSingle> GetCampList(List<C_CardData> cards)
+    public List<SCampSingle> GetCampList(List<SWarCardInfo> cards)
     {
         _tempCampSingles.Clear();
         foreach (var card in cards)
         {
-            CheckCampList(_tempCampSingles, card.CardData.CampType1, card.CardData);
-            CheckCampList(_tempCampSingles, card.CardData.CampType2, card.CardData);
-            CheckCampList(_tempCampSingles, card.CardData.CampType3, card.CardData);
-            CheckCampList(_tempCampSingles, card.CardData.CampType4, card.CardData);
+            CheckCampList(_tempCampSingles, card.WarCard.CardData.CampType1, card.WarCard.CardData);
+            CheckCampList(_tempCampSingles, card.WarCard.CardData.CampType2, card.WarCard.CardData);
+            CheckCampList(_tempCampSingles, card.WarCard.CardData.CampType3, card.WarCard.CardData);
+            CheckCampList(_tempCampSingles, card.WarCard.CardData.CampType4, card.WarCard.CardData);
         }
         return _tempCampSingles;
     }

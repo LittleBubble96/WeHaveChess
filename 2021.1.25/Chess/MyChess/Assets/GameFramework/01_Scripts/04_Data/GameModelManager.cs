@@ -137,4 +137,22 @@ public class GameModelManager : BubbleFrameModel
     }
 
     #endregion
+    
+    #region 全局变量
+
+    private List<TableGlobalVariable> getTableGlobalVariables;
+
+    public List<TableGlobalVariable> GetTableGlobalVariables
+    {
+        get
+        {
+            if (getTableGlobalVariables == null)
+            {
+                getTableGlobalVariables = DataModelTable<TableGlobalVariable>.ParseTable().ToList();
+            }
+            return getTableGlobalVariables;
+        }
+    }
+
+    #endregion
 }
